@@ -61,7 +61,7 @@ The web UI provides a user-friendly form to enter your credentials and date rang
     ```bash
     python3 alert_audit_ui.py
     ```
-2.  **Open your browser:** Navigate to `http://127.0.0.1:5000`.
+2.  **Open your browser:** Navigate to `http://127.0.0.1:5001`.
 3.  **Fill out the form** with your API Key, Account ID, and desired date range.
 4.  **Click "Generate Reports"**. You will be taken to a new page where you can download your two CSV files.
 
@@ -132,9 +132,19 @@ This file is a detailed dump of all `NrAuditEvent` records where the `actionIden
 
 ---
 
-## 5. Additional Resources
+## 5. Audit Log Query
+
+To retrieve the data for `nr_audit_event.csv`, the script constructs and executes the following NRQL query via the API. The `SINCE` and `UNTIL` clauses are populated based on the command-line arguments or the 30-day default.
+
+```nrql
+FROM NrAuditEvent SELECT * WHERE actionIdentifier LIKE 'alerts%' SINCE 'YYYY-MM-DD 00:00:00' UNTIL 'YYYY-MM-DD 23:59:59'
+```
+
+---
+
+## 6. Additional Resources
 
 For more detailed information, please refer to the official New Relic documentation:
 
-1.  **NrAuditEvent**: [Introduction to the audit log](https://docs.newrelic.com/docs/telemetry-data-platform/data-ingest-apis/manage-data/introduction-audit-log/)
+1.  **NrAuditEvent**: [Introduction to the audit logs](https://docs.newrelic.com/docs/accounts/accounts/account-maintenance/query-account-audit-logs-nrauditevent/)
 2.  **NerdGraph (GraphQL) API**: [Introduction to New Relic NerdGraph](https://docs.newrelic.com/docs/apis/nerdgraph/get-started/introduction-new-relic-nerdgraph/)
