@@ -1,4 +1,4 @@
-# New Relic Alert Change Analyzer
+# New Relic Alert Change Audit
 
 This Python utility helps organizations analyze changes to their New Relic alert configurations. It can be run as a command-line tool or as a local web application.
 
