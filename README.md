@@ -65,9 +65,9 @@ The web UI provides a user-friendly form to enter your credentials and date rang
 3.  **Fill out the form** with your API Key, Account ID, and desired date range.
 4.  **Click "Generate Reports"**. You will be taken to a new page where you can download your two CSV files.
 
-![image](images/UI_mode_1.png)
+![image](images/UI_mode_1.png =500x)
 
-![image](images/UI_mode_2.png)
+![image](images/UI_mode_2.png =500x)
 
 ### B. Running in Command-Line Mode
 
