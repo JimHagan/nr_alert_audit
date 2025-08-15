@@ -79,7 +79,6 @@ def fetch_all_data(api_key, account_id, query, data_path, entity_key):
 
 def fetch_audit_events(api_key, account_id, start_date_str, end_date_str):
     """Fetches alert-related audit events using an NRQL query."""
-    # REVISED: SINCE and UNTIL clauses are now always provided by main()
     nrql_query = f"FROM NrAuditEvent SELECT * WHERE actionIdentifier LIKE 'alerts%' SINCE '{start_date_str} 00:00:00' UNTIL '{end_date_str} 23:59:59'"
     
     headers = {"Content-Type": "application/json", "API-Key": api_key}
@@ -199,24 +198,21 @@ def main():
     parser.add_argument('--end', dest='update_range_end', required=False, help="The end of the date range (YYYY-MM-DD).")
     args = parser.parse_args()
 
-    # --- REVISED: Date handling logic ---
     start_date_str = args.update_range_start
     end_date_str = args.update_range_end
 
-    # Rule 2: Enforce that both start and end dates must be provided together.
     if (start_date_str and not end_date_str) or (not start_date_str and end_date_str):
         print("\n❌ Error: Both --start and --end arguments must be provided together.")
         parser.print_help()
         return
 
-    # Rule 1: Default to the last 30 days if no date range is provided.
     if not start_date_str and not end_date_str:
-        print("No date range specified. Defaulting to the last 30 days.")
+        # REVISED: Clearer message for the default date range
+        print("\nNOTICE: No date range specified. The script will default to the last 30 days.")
         end_dt = datetime.now()
         start_dt = end_dt - timedelta(days=30)
         start_date_str = start_dt.strftime('%Y-%m-%d')
         end_date_str = end_dt.strftime('%Y-%m-%d')
-    # --- End of revised logic ---
 
     api_key = os.getenv("NEW_RELIC_API_KEY")
     account_id_str = os.getenv("NEW_RELIC_ACCOUNT_ID")
