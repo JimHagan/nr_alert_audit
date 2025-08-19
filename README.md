@@ -6,6 +6,8 @@ By querying both the New Relic Alerts API and the Audit Log API, it provides a c
 
 The script generates two detailed CSV files, providing both a high-level summary of changed conditions and a low-level dump of all alert-related audit events.
 
+For a more general, interactive UI for exploring NrAuditEvent data try using [this application](https://github.com/JimHagan/nr-audit-events-ui).
+
 ---
 
 ## 1. Prerequisites
